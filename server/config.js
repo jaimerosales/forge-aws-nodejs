@@ -22,8 +22,8 @@
 module.exports = {
   // set environment variables or hard-code here
   credentials: {
-    client_id: process.env.FORGE_CLIENT_ID,
-    client_secret: process.env.FORGE_CLIENT_SECRET
+    client_id: process.env.FORGE_CLIENT_ID || 'qfG08RMQqZZhNxo6Hj9xj5XA5tgKSVBI',
+    client_secret: process.env.FORGE_CLIENT_SECRET || 'YAlyszC3GNILASSV'
   },
 
   // Required scopes for your application on server-side
