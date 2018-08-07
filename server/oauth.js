@@ -47,8 +47,8 @@ module.exports = {
     OAuthRequest: function (scopes, cache) {
          
         if (awsFlag){
-            client_id = configAWSnpm.forgeAWSCLientId()
-            client_secret = configAWSnpm.forgeAWSCLientSecret()
+            client_id = configAWS.forgeAWSCLientId()
+            client_secret = configAWS.forgeAWSCLientSecret()
         }else{
             client_id = config.credentials.client_id;
             client_secret =  config.credentials.client_secret;
@@ -63,8 +63,8 @@ module.exports = {
             }
 
             if (awsFlag){
-                client_id = configAWSnpm.forgeAWSCLientId()
-                client_secret = configAWSnpm.forgeAWSCLientSecret()
+                client_id = configAWS.forgeAWSCLientId()
+                client_secret = configAWS.forgeAWSCLientSecret()
             }else{
                 client_id = config.credentials.client_id;
                 client_secret =  config.credentials.client_secret;
@@ -89,8 +89,8 @@ module.exports = {
     OAuthClient: function (scopes) {
        
         if (awsFlag){
-            client_id = configAWSnpm.forgeAWSCLientId()
-            client_secret = configAWSnpm.forgeAWSCLientSecret()
+            client_id = configAWS.forgeAWSCLientId()
+            client_secret = configAWS.forgeAWSCLientSecret()
         }else{
             client_id = config.credentials.client_id;
             client_secret =  config.credentials.client_secret;
