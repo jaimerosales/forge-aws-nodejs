@@ -24,13 +24,13 @@ const awsParamStore = require( 'aws-param-store' );
 module.exports = {
 
     forgeAWSCLientId: function() {
-        let parameter = awsParamStore.getParameterSync( 'ForgeClientIdX' ,{region: 'eu-central-1'});
+        let parameter = awsParamStore.getParameterSync( 'ForgeClientIdX' ,{region: 'eu-west-1'});
         console.log('clientID param', parameter.Value.toString());
         return parameter.Value;
     },
 
     forgeAWSCLientSecret: function() {
-        let parameter = awsParamStore.getParameterSync( 'ForgeClientSecretX' ,{region: 'eu-central-1'});
+        let parameter = awsParamStore.getParameterSync( 'ForgeClientSecretX' ,{region: 'eu-west-1'});
         console.log('clientSecret param', parameter.Value.toString());
         return parameter.Value;
     }
