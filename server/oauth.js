@@ -30,10 +30,8 @@ var configAWS = require('./configAWS');
 // Cache of the access tokens
 var _cached = [];
 
-
 var client_id;
 var client_secret;
-var awsFlag = process.env.FORGE_AWS_FLAG;
 
 module.exports = {
     getTokenPublic: function () {
@@ -45,14 +43,6 @@ module.exports = {
     },
 
     OAuthRequest: function (scopes, cache) {
-         
-        if (awsFlag){
-            client_id = configAWS.forgeAWSCLientId()
-            client_secret = configAWS.forgeAWSCLientSecret()
-        }else{
-            client_id = config.credentials.client_id;
-            client_secret =  config.credentials.client_secret;
-        }
         
         var forgeOAuth = this.OAuthClient(scopes);
         
@@ -62,15 +52,6 @@ module.exports = {
                 return;
             }
 
-            if (awsFlag){
-                client_id = configAWS.forgeAWSCLientId()
-                client_secret = configAWS.forgeAWSCLientSecret()
-            }else{
-                client_id = config.credentials.client_id;
-                client_secret =  config.credentials.client_secret;
-            }
-
-            new forgeSDK.AuthClientTwoLegged(client_id, client_secret, scopes);
             forgeOAuth.authenticate()
                 .then(function (credentials) {
                     _cached[cache] = credentials;
@@ -87,15 +68,10 @@ module.exports = {
     },
 
     OAuthClient: function (scopes) {
-       
-        if (awsFlag){
-            client_id = configAWS.forgeAWSCLientId()
-            client_secret = configAWS.forgeAWSCLientSecret()
-        }else{
-            client_id = config.credentials.client_id;
-            client_secret =  config.credentials.client_secret;
-        }
 
+        client_id = configAWS.forgeAWSClientId()
+        client_secret = configAWS.forgeAWSClientSecret()
+       
         if (scopes == undefined) scopes = config.scopeInternal;
         return new forgeSDK.AuthClientTwoLegged(client_id, client_secret, scopes);
     }

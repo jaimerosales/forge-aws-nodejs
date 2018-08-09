@@ -18,20 +18,33 @@
 
 'use strict';
 
-const awsParamStore = require( 'aws-param-store' );
+var awsParamStore = require( 'aws-param-store' );
+
+var awsFlag = process.env.FORGE_AWS_FLAG;
+var paramStore = {"region": process.env.AWS_REGION}
 
 // Autodesk Forge AWS configuration
 module.exports = {
-
-    forgeAWSCLientId: function() {
-        let parameter = awsParamStore.getParameterSync( 'ForgeClientIdX' ,{region: 'eu-west-1'});
-        console.log('clientID param', parameter.Value.toString());
+    
+    getParamStore: function() {
+        // IF not running on AWS, paramStore requires access and secret AWS Keys
+        if (awsFlag!==1){
+            paramStore.credentials = 
+            {
+                "accessKeyId" : process.env.accessKeyId,
+                "secretAccessKey" : process.env.secretAccessKey
+            };
+            return paramStore;
+        }
+    },
+    
+    forgeAWSClientId: function() {
+        let parameter = awsParamStore.getParameterSync( 'ForgeClientIdX' , this.getParamStore());
         return parameter.Value;
     },
 
-    forgeAWSCLientSecret: function() {
-        let parameter = awsParamStore.getParameterSync( 'ForgeClientSecretX' ,{region: 'eu-west-1'});
-        console.log('clientSecret param', parameter.Value.toString());
+    forgeAWSClientSecret: function() {
+        let parameter = awsParamStore.getParameterSync( 'ForgeClientSecretX' ,this.getParamStore());
         return parameter.Value;
     }
 }
