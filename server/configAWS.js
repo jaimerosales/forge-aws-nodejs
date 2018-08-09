@@ -27,7 +27,7 @@ var paramStore = {"region": process.env.AWS_REGION}
 module.exports = {
     
     getParamStore: function() {
-        // IF not running on AWS, paramStore requires access and secret AWS Keys
+        // If not running on AWS, paramStore requires access and secret AWS Keys
         if (awsFlag!==1){
             paramStore.credentials = 
             {
@@ -36,6 +36,7 @@ module.exports = {
             };
             return paramStore;
         }
+        return paramStore;
     },
     
     forgeAWSClientId: function() {
