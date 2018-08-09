@@ -34,7 +34,6 @@ module.exports = {
                 "accessKeyId" : process.env.accessKeyId,
                 "secretAccessKey" : process.env.secretAccessKey
             };
-            return paramStore;
         }
         return paramStore;
     },
