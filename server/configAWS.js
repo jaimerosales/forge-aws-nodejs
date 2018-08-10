@@ -25,17 +25,24 @@ var paramStore = {"region": process.env.AWS_REGION}
 
 // Autodesk Forge AWS configuration
 module.exports = {
+
+    // Required scopes for your application on server-side
+    scopeInternal: ['bucket:create', 'bucket:read', 'data:read', 'data:create', 'data:write'],
+    // Required scope of the token sent to the client
+    scopePublic: ['viewables:read'],
     
     getParamStore: function() {
         // If not running on AWS, paramStore requires access and secret AWS Keys
-        if (awsFlag!==1){
+        if (awsFlag){
+            return paramStore;
+        }else{
             paramStore.credentials = 
             {
                 "accessKeyId" : process.env.accessKeyId,
                 "secretAccessKey" : process.env.secretAccessKey
             };
         }
-        return paramStore;
+        return paramStore;                        
     },
     
     forgeAWSClientId: function() {

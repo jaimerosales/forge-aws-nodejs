@@ -15,31 +15,24 @@
 // DOES NOT WARRANT THAT THE OPERATION OF THE PROGRAM WILL BE
 // UNINTERRUPTED OR ERROR FREE.
 /////////////////////////////////////////////////////////////////////
-
 'use strict';
 
 // Forge NPM
 var forgeSDK = require('forge-apis');
 
-// Forge config information, such as client ID and secret
-var config = require('./config');
-
-// Forge config AWS information, such as client ID and secret
+// Forge config AWS information, such as client ID and secret from AWS SSM service
 var configAWS = require('./configAWS');
 
 // Cache of the access tokens
 var _cached = [];
 
-var client_id;
-var client_secret;
-
 module.exports = {
     getTokenPublic: function () {
-        return this.OAuthRequest(config.scopePublic, 'public');
+        return this.OAuthRequest(configAWS.scopePublic, 'public');
     },
 
     getTokenInternal: function () {
-        return this.OAuthRequest(config.scopeInternal, 'internal');
+        return this.OAuthRequest(configAWS.scopeInternal, 'internal');
     },
 
     OAuthRequest: function (scopes, cache) {
@@ -69,10 +62,10 @@ module.exports = {
 
     OAuthClient: function (scopes) {
 
-        client_id = configAWS.forgeAWSClientId()
-        client_secret = configAWS.forgeAWSClientSecret()
+        var client_id = configAWS.forgeAWSClientId()
+        var client_secret = configAWS.forgeAWSClientSecret()
        
-        if (scopes == undefined) scopes = config.scopeInternal;
+        if (scopes == undefined) scopes = configAWS.scopeInternal;
         return new forgeSDK.AuthClientTwoLegged(client_id, client_secret, scopes);
     }
 }
