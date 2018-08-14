@@ -46,12 +46,12 @@ module.exports = {
     },
     
     forgeAWSClientId: function() {
-        let parameter = awsParamStore.getParameterSync( 'ForgeClientIdX' , this.getParamStore());
+        let parameter = awsParamStore.getParameterSync( 'SSMForgeClientId' , this.getParamStore());
         return parameter.Value;
     },
 
     forgeAWSClientSecret: function() {
-        let parameter = awsParamStore.getParameterSync( 'ForgeClientSecretX' ,this.getParamStore());
+        let parameter = awsParamStore.getParameterSync( 'SSMForgeClientSecret' ,this.getParamStore());
         return parameter.Value;
     }
 }
